@@ -1,9 +1,11 @@
-﻿using DesktopMauiCrud.MauiCrud.Data.Interface;
+﻿using DesktopMauiCrud.MauiCrud.Core.Entities;
+using DesktopMauiCrud.MauiCrud.Core.Exceptions;
+using DesktopMauiCrud.MauiCrud.Data.Interface;
 using System.Text.Json;
 
 namespace DesktopMauiCrud.MauiCrud.Data.Imps
 {
-    public class JsonDataStorage<T> : IDataStorage<T>
+    public class JsonDataStorage<T> : IDataStorage<T> where T : BaseEntity
     {
         private static readonly string FolderPath = FileSystem.AppDataDirectory;
         private static readonly string FileName = $"{typeof(T).Name}.json";
@@ -48,13 +50,18 @@ namespace DesktopMauiCrud.MauiCrud.Data.Imps
 
         public T Get(Func<T, bool> predicate)
         {
-            foreach (var item in _items)
-            {
-                if (predicate(item)) return item;
-            }
+            var item = _items.FirstOrDefault(predicate);
+            if (item is null)
+                NotFoundException.Raise();
 
-            throw new Exception("Not Found");
+            return item;
         }
 
+        public IEnumerable<T> List(Func<T, bool>? predicate = null)
+        {
+            return predicate is null
+                ? _items
+                : _items.Where(predicate);
+        }
     }
 }

@@ -1,8 +1,7 @@
 ﻿namespace DesktopMauiCrud.MauiCrud.Core.Entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
-        public int Id { get; set; }
         public required string StreetName { get; set; }
         public required string IdentificationNumber { get; set; }
         public required string ZipCode { get; set; }

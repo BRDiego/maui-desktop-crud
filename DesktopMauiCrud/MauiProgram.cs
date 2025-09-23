@@ -1,5 +1,9 @@
-﻿using DesktopMauiCrud.MauiCrud.Data.Imps;
+﻿using DesktopMauiCrud.MauiCrud.Data.DAOs;
+using DesktopMauiCrud.MauiCrud.Data.Imps;
 using DesktopMauiCrud.MauiCrud.Data.Interface;
+using DesktopMauiCrud.MauiCrud.Data.Interface.UseCase;
+using DesktopMauiCrud.MauiCrud.Services;
+using DesktopMauiCrud.MauiCrud.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace DesktopMauiCrud
@@ -21,6 +25,9 @@ namespace DesktopMauiCrud
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton(typeof(IDataStorage<>), typeof(JsonDataStorage<>));
+            builder.Services.AddSingleton<IClientDAO, ClientDAO>();
+            builder.Services.AddSingleton<ClientService>();
+            builder.Services.AddScoped<ClientListViewModel>();
 
             return builder.Build();
         }

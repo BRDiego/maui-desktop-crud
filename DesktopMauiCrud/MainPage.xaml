@@ -30,6 +30,13 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="TestBtn"
+                Text="OLa amigo" 
+                SemanticProperties.Hint="Tests the json storage"
+                Clicked="RunDummyTest"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 
