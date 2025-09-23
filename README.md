@@ -1,15 +1,15 @@
 Empty List
-![Empty List](images/empty_list.png)
+![Empty List](Images/empty_list.png)
 
 Creating item
-![Creating item](images/creating.png)
+![Creating item](Images/creating.png)
 
 Confirmation
-![Confirmation](images/confirmation.png)
+![Confirmation](Images/confirmation.png)
 
 Validation
-![Validation](images/validation.png)
+![Validation](Images/validation.png)
 
 Items list
-![Items list](images/double_item.png)
+![Items list](Images/double_item.png)
 
