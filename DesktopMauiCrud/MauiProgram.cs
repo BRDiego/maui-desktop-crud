@@ -27,7 +27,8 @@ namespace DesktopMauiCrud
             builder.Services.AddSingleton(typeof(IDataStorage<>), typeof(JsonDataStorage<>));
             builder.Services.AddSingleton<IClientDAO, ClientDAO>();
             builder.Services.AddSingleton<ClientService>();
-            builder.Services.AddScoped<ClientListViewModel>();
+            builder.Services.AddTransient<ClientListViewModel>();
+            builder.Services.AddTransient<ClientEditViewModel>();
 
             return builder.Build();
         }

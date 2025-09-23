@@ -60,8 +60,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="MauiCrud\Screens\Client\NewFolder\**" />
+	  <Compile Remove="MauiCrud\Screens\Client\NewFolder\**" />
+	  <EmbeddedResource Remove="MauiCrud\Screens\Client\NewFolder\**" />
+	  <MauiCss Remove="MauiCrud\Screens\Client\NewFolder\**" />
+	  <MauiXaml Remove="MauiCrud\Screens\Client\NewFolder\**" />
+	  <None Remove="MauiCrud\Screens\Client\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="MauiCrud\Screens\Client\ClientEditPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MauiCrud\Screens\Client\ClientsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -11,9 +11,7 @@ namespace DesktopMauiCrud.MauiCrud.DTO.Mappers
             return new AddressDTO(
                 entity.Id,
                 entity.StreetName,
-                entity.IdentificationNumber,
-                entity.ZipCode,
-                entity.Complement
+                entity.ZipCode
             );
         }
 
@@ -25,9 +23,7 @@ namespace DesktopMauiCrud.MauiCrud.DTO.Mappers
             {
                 Id = dto.Id,
                 StreetName = dto.StreetName,
-                IdentificationNumber = dto.IdentificationNumber,
-                ZipCode = dto.ZipCode,
-                Complement = dto.Complement
+                ZipCode = dto.ZipCode
             };
         }
     }

@@ -31,7 +31,7 @@ namespace DesktopMauiCrud
         {
             try
             {
-                var teste = vm.clients.FirstOrDefault();
+                var teste = vm.Clients.FirstOrDefault();
                 var id = Guid.NewGuid();
                 if (!(teste is null))
                 {
@@ -42,9 +42,7 @@ namespace DesktopMauiCrud
                 var add = new AddressDTO(
                     Guid.NewGuid(),
                     "Narnia",
-                    "SemID",
-                    "000-0000",
-                    "Peaceful"
+                    "000-0000"
                 );
                 var cli = new ClientDTO(
                     id,
@@ -58,7 +56,7 @@ namespace DesktopMauiCrud
                 vm.SaveClient(cli);
                 vm.RefreshList();
 
-                var doiz = vm.clients.First();
+                var doiz = vm.Clients.First();
                 await AppUtils.DisplayMessage(this, doiz.Name);
             }
             catch (Exception ex)

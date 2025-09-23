@@ -23,5 +23,10 @@ namespace DesktopMauiCrud.MauiCrud.Services
         {
             _dao.Save(cli.ToEntity());
         }
+
+        public void Delete(ClientDTO cli)
+        {
+            _dao.Delete(cli.ToEntity());
+        }
     }
 }

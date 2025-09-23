@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DesktopMauiCrud.MauiCrud.Screens.Client.ClientsListPage"
+             xmlns:vm="clr-namespace:DesktopMauiCrud.MauiCrud.ViewModels"
+             xmlns:vconv="clr-namespace:DesktopMauiCrud.MauiCrud.Screens.ValueConverters"
+             Title="Clients control"
+             x:Name="ClientListPage" >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vconv:DateOfBirthConverter x:Key="DateOfBirthConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout Padding="10">
+
+        <Label 
+            Text="List of registers"
+            FontSize="24"
+            HorizontalOptions="Center" />
+        
+        <Button Text="Add new"
+                    Command="{Binding AddClientCommand}"
+                    CommandParameter="{x:Reference ClientListPage}"/>
+
+        <CollectionView 
+            ItemsSource="{Binding Clients}"
+            SelectionMode="Single"
+            SelectionChanged="OnClientSelected"
+            SelectedItem="{Binding SelectedClient, Mode=TwoWay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView>
+                        <Border
+                        Margin="20"
+                        Padding="100, 20"
+                        HorizontalOptions="Center">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="40,40,0,40" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout
+                            Padding="10"
+                            HorizontalOptions="Start">
+                                <Label FontAttributes="Bold">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Name: " />
+                                            <Span Text="{Binding Name}" FontAttributes="None" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontAttributes="Bold">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Last Name: " />
+                                            <Span Text="{Binding LastName}" FontAttributes="None" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label
+                                    Text="{Binding DateOfBirth, Converter={StaticResource DateOfBirthConverter}}">
+                                </Label>
+
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Age: " />
+                                            <Span Text="{Binding Age}" FontAttributes="None" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Border>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label
+                    Margin="50"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="No items to list"></Label>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

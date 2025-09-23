@@ -15,8 +15,6 @@
                 return "No address!";
             
             return $"{Address.StreetName}" +
-                $"{Environment.NewLine}{Address.IdentificationNumber}" +
-                $"{Environment.NewLine}{Address.Complement}" +
                 $"{Environment.NewLine}{Address.ZipCode}";
         }
     }
