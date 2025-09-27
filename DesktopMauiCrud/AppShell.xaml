@@ -5,11 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DesktopMauiCrud"
     xmlns:screens="clr-namespace:DesktopMauiCrud.MauiCrud.Screens.Client"
+    xmlns:charts="clr-namespace:DesktopMauiCrud.MauiCrud.Screens.Charts"
     Title="DesktopMauiCrud">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate screens:ClientsListPage}"
+        ContentTemplate="{DataTemplate charts:StocasticSimulatorPage}"
         Route="ClientsList" />
 
 </Shell>
