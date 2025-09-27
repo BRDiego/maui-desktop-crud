@@ -11,17 +11,13 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
         private IAlertService _alerts;
         private BrownianMotionCalculator _calculator;
 
-        [ObservableProperty]
-        private LineChartDraw lineChart = new LineChartDraw([]);
+        [ObservableProperty] private LineChartDraw lineChart = new LineChartDraw([]);
 
-        [ObservableProperty]
-        private string initialPriceText;
+        [ObservableProperty] private string initialPriceText;
 
-        [ObservableProperty]
-        private string volatilityText;
+        [ObservableProperty] private double volatility = 0.0;
 
-        [ObservableProperty]
-        private string averageReturnText;
+        [ObservableProperty] private double averageReturn = 0.0;
 
         [ObservableProperty]
         private string daysDurationText;
@@ -41,31 +37,10 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
                     return;
 
                 InitialPriceText = string.Empty;
-                VolatilityText = string.Empty;
-                AverageReturnText = string.Empty;
                 DaysDurationText = string.Empty;
+                Volatility = 0.0;
+                AverageReturn = 0.0;
                 UpdateChartData([]);
-            }
-            catch (Exception ex)
-            {
-                await _alerts.ShowError(ex.Message);
-            }
-        }
-
-        [RelayCommand]
-        public async Task Simulate()
-        {
-            try
-            {
-                if (!await ValidInputs())
-                    return;
-
-                var ini = double.Parse(InitialPriceText);
-                var vol = double.Parse(VolatilityText) / 100;
-                var ave = double.Parse(AverageReturnText) / 100;
-                var dur = int.Parse(DaysDurationText);
-
-                UpdateChartData(_calculator.GenerateBrownianMotion(vol, ave, ini, dur));
             }
             catch (Exception ex)
             {
@@ -79,32 +54,42 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
             OnPropertyChanged(nameof(LineChart));
         }
 
+        [RelayCommand]
+        public async Task Simulate()
+        {
+            try
+            {
+                if (!await ValidInputs())
+                    return;
+
+                var ini = double.Parse(InitialPriceText);
+                var vol = Volatility / 100;
+                var ave = AverageReturn / 100;
+                var dur = int.Parse(DaysDurationText);
+
+                UpdateChartData(_calculator.GenerateBrownianMotion(vol, ave, ini, dur));
+            }
+            catch (Exception ex)
+            {
+                await _alerts.ShowError(ex.Message);
+            }
+        }
+
+
         private async Task<bool> ValidInputs()
         {
-            var doubleHelper = 0.0;
-            if (!double.TryParse(InitialPriceText, out doubleHelper))
+            if (!double.TryParse(InitialPriceText, out var dRes))
             {
-                await _alerts.ShowMessage("Initial price is invalid");
+                await _alerts.ShowMessage($"Initial price is invalid ({dRes})");
                 return false;
             }
             
-            if (!double.TryParse(VolatilityText, out doubleHelper))
+            if (!int.TryParse(DaysDurationText, out var iRes) || iRes < 1)
             {
-                await _alerts.ShowMessage("Volatility is invalid");
+                await _alerts.ShowMessage($"Days duration {iRes} is invalid");
                 return false;
             }
-            
-            if (!double.TryParse(AverageReturnText, out doubleHelper))
-            {
-                await _alerts.ShowMessage("Average return is invalid");
-                return false;
-            }
-            
-            if (!int.TryParse(DaysDurationText, out var helper))
-            {
-                await _alerts.ShowMessage("Days duration is invalid");
-                return false;
-            }
+
 
             return true;
         }

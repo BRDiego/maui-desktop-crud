@@ -45,7 +45,7 @@
                           />
                     <Entry 
                         x:Name="EntryInitialPrice" Keyboard="Numeric" 
-                       TextChanged="NumericEntryTextChanged"
+                       TextChanged="InitialPriceTextChanged"
                         Text="{Binding InitialPriceText}"
                        MaxLength="8"/>
                 </VerticalStackLayout>
@@ -56,43 +56,109 @@
                 VerticalOptions="Center"
                 Margin="10, 0, 30, 0">
 
-                    <Label Text="Volatility (%):"/>
-                    <Entry 
-                        x:Name="EntryVolatility" 
-                        Keyboard="Numeric"
-                        TextChanged="NumericEntryTextChanged"
-                        MaxLength="4"
-                        Text="{Binding VolatilityText}"
-                        />
-
-                </VerticalStackLayout>
-
-                <VerticalStackLayout
-                Grid.Row="2"
-                Grid.Column="0"
-                VerticalOptions="Center"
-                Margin="10, 0, 30, 0">
-
-                    <Label Text="Average return (%):"/>
-                    <Entry x:Name="EntryAverageReturn" Keyboard="Numeric"
-                       TextChanged="NumericEntryTextChanged"
-                        Text="{Binding AverageReturnText, Mode=TwoWay}"
-                       MaxLength="4"/>
-
-                </VerticalStackLayout>
-
-                <VerticalStackLayout
-                Grid.Row="2"
-                Grid.Column="1"
-                VerticalOptions="Center"
-                Margin="10, 0, 30, 0">
-
                     <Label Text="Time span (days):"/>
                     <Entry x:Name="EntryTimeDuration" Keyboard="Numeric"
-                       TextChanged="NumericEntryTextChanged"
+                       TextChanged="DaysDurationTextChanged"
                         Text="{Binding DaysDurationText}"
                        MaxLength="4"/>
                 </VerticalStackLayout>
+                
+                <VerticalStackLayout 
+                    Grid.Row="2" 
+                    Grid.Column="0" 
+                    Margin="10,0,30,0"
+                    >
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Medium"
+                                    Text="Volatility "/>
+                                <Span
+                                    FontSize="Medium"
+                                    Text="{Binding Volatility, StringFormat='{}{0:F1}%'}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    <Slider Minimum="0" Maximum="100" 
+                            Value="{Binding Volatility, Mode=TwoWay}" />
+                    
+                </VerticalStackLayout>
+
+                <Border
+                    Grid.Row="2" Grid.Column="1" Margin="10,0,30,0"
+                    Padding="10">
+                    <VerticalStackLayout>
+                    
+                    <Label Text="Average return (%)" 
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="{Binding AverageReturn, StringFormat='{}{0:F1}%'}"
+                           HorizontalOptions="Center"/>
+
+                        <Grid
+                            Margin="150,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Stepper 
+                            HorizontalOptions="Start"
+                            Minimum="-100"
+                            Maximum="100"
+                            Increment="0.1"
+                            Scale="1.5"
+                            Value="{Binding AverageReturn, Mode=TwoWay}" 
+                            />
+                            <Label 
+                            Grid.Row="1"
+                            Text="0.1"
+                            Margin="20,10"
+                            />
+
+                            <Stepper 
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            Minimum="-100"
+                            Maximum="100"
+                            Increment="1"
+                            Scale="1.5"
+                            Value="{Binding AverageReturn, Mode=TwoWay}" 
+                            />
+                            <Label 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="1"
+                            Margin="20,10"
+                            HorizontalOptions="Center"
+                            />
+
+                            <Stepper 
+                            Grid.Column="2"
+                            HorizontalOptions="End"
+                            Minimum="-100"
+                            Maximum="100"
+                            Increment="10"
+                            Scale="1.5"
+                            Value="{Binding AverageReturn, Mode=TwoWay}" 
+                            />
+                            <Label 
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Text="10"
+                            Margin="20,10"
+                            HorizontalOptions="End"
+                            />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
 
                 <Button
                     Grid.Row="3"
