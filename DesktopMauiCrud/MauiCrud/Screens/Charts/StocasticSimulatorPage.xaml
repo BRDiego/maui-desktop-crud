@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DesktopMauiCrud.MauiCrud.Screens.Charts.StocasticSimulatorPage"
+             Title="StocasticSimulatorPage"
+             xmlns:Drawing="clr-namespace:DesktopMauiCrud.MauiCrud.Screens.GraphicDrawing">
+
+    <ScrollView>
+        <Grid RowSpacing="10" 
+          ColumnSpacing="0"
+          Padding="10"
+          Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label 
+                Text="Stocastic behaviour simulator"
+                FontSize="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Grid.Row="0" 
+                />
+
+            <Grid Grid.Row="1" RowSpacing="5" ColumnSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalOptions="Center"
+                Margin="10, 0, 30, 0">
+                    <Label Text="Initial price:"
+                          />
+                    <Entry 
+                        x:Name="EntryInitialPrice" Keyboard="Numeric" 
+                       TextChanged="NumericEntryTextChanged"
+                        Text="{Binding InitialPriceText}"
+                       MaxLength="8"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Margin="10, 0, 30, 0">
+
+                    <Label Text="Volatility (%):"/>
+                    <Entry 
+                        x:Name="EntryVolatility" 
+                        Keyboard="Numeric"
+                        TextChanged="NumericEntryTextChanged"
+                        MaxLength="4"
+                        Text="{Binding VolatilityText}"
+                        />
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                VerticalOptions="Center"
+                Margin="10, 0, 30, 0">
+
+                    <Label Text="Average return (%):"/>
+                    <Entry x:Name="EntryAverageReturn" Keyboard="Numeric"
+                       TextChanged="NumericEntryTextChanged"
+                        Text="{Binding AverageReturnText, Mode=TwoWay}"
+                       MaxLength="4"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                Grid.Row="2"
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Margin="10, 0, 30, 0">
+
+                    <Label Text="Time span (days):"/>
+                    <Entry x:Name="EntryTimeDuration" Keyboard="Numeric"
+                       TextChanged="NumericEntryTextChanged"
+                        Text="{Binding DaysDurationText}"
+                       MaxLength="4"/>
+                </VerticalStackLayout>
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Reset"
+                    Padding="20"
+                    Margin="20"
+                    HorizontalOptions="Center"
+                    Command="{Binding ResetCommand}"
+                    >
+                </Button>
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Text="Execute simulation"
+                    Padding="20"
+                    Margin="20"
+                    HorizontalOptions="Center"
+                    Command="{Binding SimulateCommand}"
+                    >
+                </Button>
+
+            </Grid>
+
+            <Border
+                Grid.Row="2"
+                Padding="0"
+                Margin="0"
+                >
+                <Grid
+                    Padding="0"
+                    Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <GraphicsView
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        x:Name="GVLineChart"
+                        Drawable="{Binding LineChart}"
+                        HeightRequest="200"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill">
+                    </GraphicsView>
+
+                    <Label
+                        Text="Price"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="20,0"
+                        FontSize="Large"
+                        Rotation="-90"
+                        VerticalOptions="Center"
+                        />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,5"
+                        FontSize="Large"
+                        Text="Days"
+                        HorizontalOptions="Center"
+                        />
+                    <Line 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        X1="0" Y1="0" X2="0" Y2="{Binding Height, Source={RelativeSource Self}}"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        VerticalOptions="Fill" 
+                        />
+                    <Line 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        X1="0" Y1="0" X2="{Binding Width, Source={RelativeSource Self}}" Y2="0"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        HorizontalOptions="Fill" 
+                        />
+
+                </Grid>
+            </Border>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
