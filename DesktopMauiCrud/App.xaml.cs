@@ -12,12 +12,7 @@ namespace DesktopMauiCrud
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var win = new Window(new AppShell());
-            win.Height = win.MaximumHeight;
-            win.Width = win.MaximumWidth;
-            win.X = -10;
-            win.Y = -10;
-            return win;
+            return new Window(new AppShell());
         }
 
     }
