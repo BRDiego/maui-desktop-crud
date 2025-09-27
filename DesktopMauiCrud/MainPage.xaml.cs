@@ -36,7 +36,7 @@ namespace DesktopMauiCrud
                 if (!(teste is null))
                 {
                     id = teste.Id;
-                    await AppUtils.DisplayMessage(this, $"Client: {teste.Name} Address: {teste.FullAddress()}");
+                    await PageUtils.DisplayMessage(this, $"Client: {teste.Name} Address: {teste.FullAddress()}");
                 }
 
                 var add = new AddressDTO(
@@ -57,11 +57,11 @@ namespace DesktopMauiCrud
                 vm.RefreshList();
 
                 var doiz = vm.Clients.First();
-                await AppUtils.DisplayMessage(this, doiz.Name);
+                await PageUtils.DisplayMessage(this, doiz.Name);
             }
             catch (Exception ex)
             {
-                await AppUtils.ErrorAlert(this, ex);
+                await PageUtils.ErrorAlert(this, ex);
             }
         }
     }

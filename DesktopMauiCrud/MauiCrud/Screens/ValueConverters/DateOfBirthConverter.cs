@@ -13,7 +13,7 @@ namespace DesktopMauiCrud.MauiCrud.Screens.ValueConverters
         {
             if (value is not null && value is DateOnly dob)
             {
-                return $"Date of Birth legal: {dob:dd/MM/yyyy}";
+                return $"Date of Birth: {dob:dd/MM/yyyy}";
             }
 
             return string.Empty;

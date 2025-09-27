@@ -116,13 +116,13 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
 
                 _service.Save(cli);
 
-                await AppUtils.DisplayMessage(page, "Saved successfully!");
+                await PageUtils.DisplayMessage(page, "Saved successfully!");
 
                 BackPage();
             }
             catch (Exception ex)
             {
-                await AppUtils.ErrorAlert(page, ex);
+                await PageUtils.ErrorAlert(page, ex);
             }
         }
 
@@ -130,20 +130,20 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
         {
             if (string.IsNullOrEmpty(_name))
             {
-                await AppUtils.DisplayMessage(page, "First Name is empty");
+                await PageUtils.DisplayMessage(page, "First Name is empty");
                 return false;
             }
             
             if (string.IsNullOrEmpty(_lastName))
             {
-                await AppUtils.DisplayMessage(page, "Last Name is empty");
+                await PageUtils.DisplayMessage(page, "Last Name is empty");
                 return false;
             }
 
             var regex = new Regex(@"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$");
             if (!regex.IsMatch(DateOfBirthText))
             {
-                await AppUtils.DisplayMessage(page, "The date must be typed in this format: dd/MM/yyyy");
+                await PageUtils.DisplayMessage(page, "The date must be typed in this format: dd/MM/yyyy");
                 return false;
             }
             else
@@ -152,19 +152,19 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
             }
             if (GetAge() < 18)
             {
-                await AppUtils.DisplayMessage(page, "The minimum age for registering is 18 years old");
+                await PageUtils.DisplayMessage(page, "The minimum age for registering is 18 years old");
                 return false;
             }
 
             if (string.IsNullOrEmpty(_streetName))
             {
-                await AppUtils.DisplayMessage(page, "Street name is empty");
+                await PageUtils.DisplayMessage(page, "Street name is empty");
                 return false;
             }
 
             if (string.IsNullOrEmpty(_zipCode))
             {
-                await AppUtils.DisplayMessage(page, "ZIPCODE is empty");
+                await PageUtils.DisplayMessage(page, "ZIPCODE is empty");
                 return false;
             }
 
@@ -189,12 +189,12 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
 
                 _service.Delete(_editingRegister!);
 
-                await AppUtils.DisplayMessage(page, "Register deleted!");
+                await PageUtils.DisplayMessage(page, "Register deleted!");
                 BackPage();
             }
             catch (Exception ex)
             {
-                await AppUtils.ErrorAlert(page, ex);
+                await PageUtils.ErrorAlert(page, ex);
             }
         }
 
@@ -205,7 +205,7 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
                 return false;
             }
 
-            return await AppUtils.DisplayUserDecision(page, "Delete client");
+            return await PageUtils.DisplayUserDecision(page, "Delete client");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -238,7 +238,7 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
             }
             catch (Exception ex)
             {
-                await AppUtils.ErrorAlert(page, ex);
+                await PageUtils.ErrorAlert(page, ex);
             }
         }
 

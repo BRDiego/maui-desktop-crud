@@ -32,7 +32,7 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels
             }
             catch (Exception ex)
             {
-                await AppUtils.ErrorAlert(page, ex);
+                await PageUtils.ErrorAlert(page, ex);
             }
         }
 

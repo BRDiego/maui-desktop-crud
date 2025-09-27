@@ -2,7 +2,7 @@
 
 namespace DesktopMauiCrud.MauiCrud.Screens
 {
-    public class AppUtils
+    public class PageUtils
     {
         public async static Task<bool> DisplayUserDecision(Page screen, string actionToConfirm)
         {

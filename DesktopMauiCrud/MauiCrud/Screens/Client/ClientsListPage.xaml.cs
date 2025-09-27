@@ -21,7 +21,7 @@ public partial class ClientsListPage : ContentPage
         }
 		catch (Exception ex)
 		{
-			await AppUtils.ErrorAlert(this, ex);
+			await PageUtils.ErrorAlert(this, ex);
 		}
     }
 
@@ -44,7 +44,7 @@ public partial class ClientsListPage : ContentPage
         }
 		catch (Exception ex)
 		{
-			await AppUtils.ErrorAlert(this, ex);
+			await PageUtils.ErrorAlert(this, ex);
 		}
     }
 }
