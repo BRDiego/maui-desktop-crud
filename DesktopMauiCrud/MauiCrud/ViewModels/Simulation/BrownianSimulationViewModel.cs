@@ -12,8 +12,7 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
         private IAlertService _alerts = alerts;
         private BrownianMotionCalculator _calculator = calc;
 
-        [ObservableProperty] private SingleLineChartDraw lineChart = new SingleLineChartDraw([]);
-        //[ObservableProperty] private MultiLineChartItem multiLineChart = new MultiLineChartItem();
+        [ObservableProperty] private MultiLineChartDraw simulationChart = new();
 
         [ObservableProperty] private string initialPriceText = string.Empty;
 
@@ -41,7 +40,8 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
                 DaysDurationText = string.Empty;
                 Volatility = 0.0;
                 AverageReturn = 0.0;
-                UpdateChartData([]);
+                SimulationChart.Reset();
+                OnPropertyChanged(nameof(SimulationChart));
             }
             catch (Exception ex)
             {
@@ -51,8 +51,8 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
 
         private void UpdateChartData(double[] result)
         {
-            LineChart.UpdateData(result);
-            OnPropertyChanged(nameof(LineChart));
+            SimulationChart.AddData(result, SelectedLineStyle);
+            OnPropertyChanged(nameof(SimulationChart));
         }
 
         [RelayCommand]
@@ -60,15 +60,19 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
         {
             try
             {
+                SimulationChart.Reset();
                 if (!await ValidInputs())
                     return;
 
-                var ini = double.Parse(InitialPriceText);
-                var vol = Volatility / 100;
-                var ave = AverageReturn / 100;
-                var dur = int.Parse(DaysDurationText);
+                for (ushort iLine = 0; iLine < NumberOfLines; iLine++)
+                {
+                    var ini = double.Parse(InitialPriceText);
+                    var vol = Volatility / 100;
+                    var ave = AverageReturn / 100;
+                    var dur = int.Parse(DaysDurationText);
 
-                UpdateChartData(_calculator.GenerateBrownianMotion(vol, ave, ini, dur));
+                    UpdateChartData(_calculator.GenerateBrownianMotion(vol, ave, ini, dur));
+                }
             }
             catch (Exception ex)
             {

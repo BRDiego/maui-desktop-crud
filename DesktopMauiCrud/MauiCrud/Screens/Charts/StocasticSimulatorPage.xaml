@@ -216,7 +216,7 @@
                 <Button
                     Grid.Row="1"
                     Grid.Column="3"
-                    Text="Execute simulation"
+                    Text="Run Simulation"
                     Padding="50,20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
@@ -247,11 +247,12 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         x:Name="GVLineChart"
-                        Drawable="{Binding LineChart}"
-                        HeightRequest="500"
+                        Drawable="{Binding SimulationChart}"
+                        HeightRequest="400"
                         HorizontalOptions="Fill"
-                        VerticalOptions="Fill">
-                    </GraphicsView>
+                        VerticalOptions="Fill"
+                        />
+
 
                     <Label
                         Text="Price"

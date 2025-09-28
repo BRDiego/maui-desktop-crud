@@ -14,7 +14,7 @@ public partial class StocasticSimulatorPage : ContentPage
 
         vm.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName == nameof(vm.LineChart))
+            if (e.PropertyName == nameof(vm.SimulationChart))
             {
                 GVLineChart.Invalidate();
             }
@@ -35,6 +35,7 @@ public partial class StocasticSimulatorPage : ContentPage
             {
                 await PageUtils.DisplayMessage(this, $"The initial price {checkedText} is invalid!");
                 entry!.Text = "";
+                return;
             }
 
             entry!.Text = checkedText;
@@ -60,6 +61,7 @@ public partial class StocasticSimulatorPage : ContentPage
             {
                 await PageUtils.DisplayMessage(this, $"The days duration {checkedText} is invalid!");
                 entry!.Text = "";
+                return;
             }
 
             entry!.Text = checkedText;
