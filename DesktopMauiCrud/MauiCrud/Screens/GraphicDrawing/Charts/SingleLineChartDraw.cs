@@ -1,10 +1,10 @@
-﻿namespace DesktopMauiCrud.MauiCrud.Screens.GraphicDrawing
+﻿namespace DesktopMauiCrud.MauiCrud.Screens.GraphicDrawing.Charts
 {
-    public class LineChartDraw : IDrawable
+    public class SingleLineChartDraw : IDrawable
     {
         private double[] _dataArray;
 
-        public LineChartDraw(double[] data) 
+        public SingleLineChartDraw(double[] data) 
             => _dataArray = data;
 
         public void UpdateData(double[] data) => _dataArray = data;

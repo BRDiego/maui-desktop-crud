@@ -2,31 +2,32 @@
 using CommunityToolkit.Mvvm.Input;
 using DesktopMauiCrud.MauiCrud.Core;
 using DesktopMauiCrud.MauiCrud.Screens.Alerts;
-using DesktopMauiCrud.MauiCrud.Screens.GraphicDrawing;
+using DesktopMauiCrud.MauiCrud.Screens.GraphicDrawing.Charts;
+using DesktopMauiCrud.MauiCrud.Screens.GraphicDrawing.Enums;
 
 namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
 {
-    public partial class BrownianSimulationViewModel : ObservableObject
+    public partial class BrownianSimulationViewModel(BrownianMotionCalculator calc, IAlertService alerts) : ObservableObject
     {
-        private IAlertService _alerts;
-        private BrownianMotionCalculator _calculator;
+        private IAlertService _alerts = alerts;
+        private BrownianMotionCalculator _calculator = calc;
 
-        [ObservableProperty] private LineChartDraw lineChart = new LineChartDraw([]);
+        [ObservableProperty] private SingleLineChartDraw lineChart = new SingleLineChartDraw([]);
+        //[ObservableProperty] private MultiLineChartItem multiLineChart = new MultiLineChartItem();
 
-        [ObservableProperty] private string initialPriceText;
+        [ObservableProperty] private string initialPriceText = string.Empty;
 
         [ObservableProperty] private double volatility = 0.0;
 
         [ObservableProperty] private double averageReturn = 0.0;
 
-        [ObservableProperty]
-        private string daysDurationText;
+        [ObservableProperty] private string daysDurationText = string.Empty;
 
-        public BrownianSimulationViewModel(BrownianMotionCalculator calc, IAlertService alerts)
-        {
-            _alerts = alerts;
-            _calculator = calc;
-        }
+        [ObservableProperty] private int numberOfLines = 1;
+
+        [ObservableProperty] private LineDrawStyles selectedLineStyle = LineDrawStyles.Solid;
+
+        public List<LineDrawStyles> LineStyles { get; } = Enum.GetValues<LineDrawStyles>().ToList();
 
         [RelayCommand]
         public async Task Reset()
@@ -83,7 +84,7 @@ namespace DesktopMauiCrud.MauiCrud.ViewModels.Simulation
                 await _alerts.ShowMessage($"Initial price is invalid ({dRes})");
                 return false;
             }
-            
+
             if (!int.TryParse(DaysDurationText, out var iRes) || iRes < 1)
             {
                 await _alerts.ShowMessage($"Days duration {iRes} is invalid");
