@@ -1,4 +1,5 @@
-﻿using DesktopMauiCrud.MauiCrud.Screens.Client;
+﻿using DesktopMauiCrud.MauiCrud.Screens.Charts;
+using DesktopMauiCrud.MauiCrud.Screens.Client;
 
 namespace DesktopMauiCrud
 {
@@ -8,6 +9,8 @@ namespace DesktopMauiCrud
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ClientEditPage), typeof(ClientEditPage));
+            Routing.RegisterRoute(nameof(ClientsListPage), typeof(ClientsListPage));
+            Routing.RegisterRoute(nameof(StocasticSimulatorPage), typeof(StocasticSimulatorPage));
         }
     }
 }

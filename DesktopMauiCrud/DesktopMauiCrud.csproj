@@ -79,6 +79,9 @@
 	  <MauiXaml Update="MauiCrud\Screens\Charts\StocasticSimulatorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MauiCrud\Screens\ChooseFeaturePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MauiCrud\Screens\Client\ClientEditPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

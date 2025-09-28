@@ -4,13 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DesktopMauiCrud"
-    xmlns:screens="clr-namespace:DesktopMauiCrud.MauiCrud.Screens.Client"
-    xmlns:charts="clr-namespace:DesktopMauiCrud.MauiCrud.Screens.Charts"
+    xmlns:screens="clr-namespace:DesktopMauiCrud.MauiCrud.Screens"
     Title="DesktopMauiCrud">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate charts:StocasticSimulatorPage}"
-        Route="ClientsList" />
+        ContentTemplate="{DataTemplate screens:ChooseFeaturePage}"
+        Route="ChooseFeatureRoute" />
 
 </Shell>
